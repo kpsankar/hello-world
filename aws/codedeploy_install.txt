@@ -1,0 +1,27 @@
+Installation of codedeploy agent
+Create a micro EC2 Ubuntu instance & ssh in it
+sudo apt update
+sudo chown ubuntu:ubuntu -R /opt
+cd /opt
+wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jdk-8u151-linux-x64.tar.gz
+tar zxvf jdk-8u151-linux-x64.tar.gz
+
+nano ~/.profile
+export JAVA_HOME=/opt/jdk1.8.0_151
+PATH="$JAVA_HOME/bin:$PATH"
+Exit nano
+source ~/.profile
+sudo apt install tomcat8
+
+The webapp needs to be deployed to /var/lib/tomcat8/webapps
+------------------------------------------------------------------------
+Install the CodeDeploy agent (http://docs.aws.amazon.com/codedeploy/latest/userguide/codedeploy-agent.html)
+sudo apt install ruby
+cd /opt
+wget https://aws-codedeploy-us-west-2.s3.amazonaws.com/latest/install
+chmod +x ./install
+sudo ./install auto
+sudo service codedeploy-agent status
+sudo service codedeploy-agent start
+sudo service codedeploy-agent status
+sudo service codedeploy-agent stop
